@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1046743482454",
+    "firebase_url": "https://pubcrawlchallenge-c09c0.firebaseio.com",
+    "project_id": "pubcrawlchallenge-c09c0",
+    "storage_bucket": "pubcrawlchallenge-c09c0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1046743482454:android:d0984e695563af78",
+        "android_client_info": {
+          "package_name": "com.example.rober.pubcrawlchallengeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1046743482454-0pqnmdlqssji8l6qmhj3caofumlnu0rp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnTa4HED3mCuN_K4-oHF0A1YuLreol9-0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
