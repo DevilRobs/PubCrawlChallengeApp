@@ -29,12 +29,12 @@ public class PlayerSelectionActivity extends AppCompatActivity {
 
     public void addPlayer(){
         System.out.println("test");
-        Log.d(TAG, "aufgerufen");
+        Log.i(TAG, "aufgerufen");
         Button b = (Button) findViewById(R.id.b_addPlayer);
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "clicked");
+                Log.i(TAG, "clicked");
                 ActionBar.LayoutParams lparams = new ActionBar.LayoutParams(
                         ActionBar.LayoutParams.WRAP_CONTENT, ActionBar.LayoutParams.WRAP_CONTENT);
                 TextView tv=new TextView(activity);
