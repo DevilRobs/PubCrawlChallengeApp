@@ -59,7 +59,7 @@ public class ChallengesListViewAdapter extends ArrayAdapter<Challenges> {
 
                 if (iv_challengeIcon != null) {
                     Log.d(TAG, "challengeIcon reached");
-                    iv_challengeIcon.setImageDrawable(c.getIcon());
+                    iv_challengeIcon.setImageResource(c.getIcon());
                 }
             }
 

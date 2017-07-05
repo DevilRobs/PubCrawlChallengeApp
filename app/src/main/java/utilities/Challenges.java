@@ -10,11 +10,11 @@ public class Challenges {
 
     private String challengeName;
     private String challengeDescription;
-    private Drawable iconPath;
+    private int drawable;
 
-    public Challenges(String challengeName, String challengeDescription, Drawable icon){
+    public Challenges(String challengeName, String challengeDescription, int drawable){
         this.challengeName = challengeName;
-        this.iconPath = iconPath;
+        this.drawable = drawable;
         this.challengeDescription = challengeDescription;
     }
 
@@ -26,12 +26,12 @@ public class Challenges {
         this.challengeName = challengeName;
     }
 
-    public Drawable getIcon() {
-        return iconPath;
+    public int getIcon() {
+        return drawable;
     }
 
-    public void setIcon(Drawable iconPath) {
-        this.iconPath = iconPath;
+    public void setIcon(int drawable) {
+        this.drawable = drawable;
     }
 
     public String getChallengeDescription() {

@@ -28,8 +28,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Log.d(TAG, "New Application");
 
+        // Button to change the activity - just for testing
         Button btndo = (Button) findViewById(R.id.btnDOOOOO);
         btndo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -40,24 +40,25 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-
+        // Listview to show all available challenges (text, description and icon)
         challengesListView = (ListView) findViewById(R.id.lv_challengesList);
 
-
+        // create the List with the challenges to the list view - just for testing
         List <Challenges> challengesList = new LinkedList<>();
         challengesList.add(new Challenges("Erste Challenge",
                 "Das ist nur eine Beispielbeschreibung von einer Challenge",
-                 getResources().getDrawable(R.drawable.ic_android_black_24dp)));
+                 R.drawable.ic_android_black_24dp));
 
         challengesList.add(new Challenges("Zweite Challenge",
                 "Das ist nur eine Beispielbeschreibung von der zweiten Challenge",
-                getResources().getDrawable(R.drawable.ic_thumb_up_black_24dp)));
+               R.drawable.ic_thumb_up_black_24dp));
 
 
-
+        // set the adapter of the listview with the custom layout + adapter
         ListAdapter challengesListAdapter = new ChallengesListViewAdapter(this,
                 R.layout.challenge_list_item, challengesList);
 
+        // set the adapter to show the content in the listview
         challengesListView.setAdapter(challengesListAdapter);
 
 
