@@ -9,7 +9,7 @@
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="wrap_content" android:id="@+id/layout_player">
 
-        <LinearLayout
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
@@ -112,7 +112,7 @@
                 android:text="@string/sw_gender_male" />
 
         </LinearLayout>
-
+        -->
 
 
 
@@ -124,4 +124,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add More Player" />
+
+    <Button
+        android:id="@+id/btn_startChallenge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Let's Go!" />
 </LinearLayout>
