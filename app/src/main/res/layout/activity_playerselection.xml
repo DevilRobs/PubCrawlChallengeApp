@@ -1,18 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:id="@+id/layoutlinear">
+    android:layout_height="match_parent" android:id="@+id/activity_playerselection">
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="wrap_content" android:id="@+id/layout_player">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/et_player1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Player 1"
+                android:layout_weight="7" />
+
+            <Switch
+                android:id="@+id/sw_gender1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:paddingLeft="15dp"
+                android:text="@string/sw_gender_male" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/et_player2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Player 2"
+                android:layout_weight="0.7" />
+
+            <Switch
+                android:id="@+id/sw_gender2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:paddingLeft="15dp"
+                android:text="@string/sw_gender_male" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/et_player3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Player 3"
+                android:layout_weight="0.7" />
+
+            <Switch
+                android:id="@+id/sw_gender3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:paddingLeft="15dp"
+                android:text="@string/sw_gender_male" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:padding="10dp">
+
+            <EditText
+                android:id="@+id/et_player4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:hint="Player 4"
+                android:layout_weight="0.7" />
+
+            <Switch
+                android:id="@+id/sw_gender4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2"
+                android:paddingLeft="15dp"
+                android:text="@string/sw_gender_male" />
+
+        </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>
     <Button
-        android:id="@+id/b_addPlayer"
+        android:id="@+id/btn_addPlayer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add Player" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="First Player"
-        android:id="@+id/tv_firstPlayer" />
-
+        android:text="Add More Player" />
 </LinearLayout>

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PubCrawlChallengeApp</string>
+    <string name="sw_gender_male">Boy</string>
+    <string name="sw_gender_female">Girl</string>
 </resources>
