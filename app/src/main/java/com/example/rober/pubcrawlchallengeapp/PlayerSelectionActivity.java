@@ -84,11 +84,20 @@ public class PlayerSelectionActivity extends AppCompatActivity {
 
 
         //create a new Switch
-        Switch sw_playerGender = new Switch(activity);
+        final Switch sw_playerGender = new Switch(activity);
         sw_playerGender.setLayoutParams(sw_params);
         sw_playerGender.setPadding(15,0,0,0);
-        sw_playerGender.setTextOff("HALO");
-        sw_playerGender.setTextOn(getString(R.string.sw_gender_female));
+        sw_playerGender.setText(R.string.sw_gender_male);
+        sw_playerGender.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(sw_playerGender.isChecked()){
+                    sw_playerGender.setText(R.string.sw_gender_female);
+                }else{
+                    sw_playerGender.setText(R.string.sw_gender_male);
+                }
+            }
+        });
 
 
         //register elements
