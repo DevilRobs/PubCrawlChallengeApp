@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 public class PlayerSelectionActivity extends AppCompatActivity {
 
+    DatabaseHelper myDB;
+
     private Activity activity = this;
     private String TAG = "PlayerSelection";
     private int playerCounter = 0;
@@ -39,6 +41,10 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         for(int i = 0; i < 4; i++){
             createPlayerElement();
         }
+
+        //Initialize the database
+        myDB = new DatabaseHelper(this);
+
     }
 
     private View.OnClickListener addPlayer = new View.OnClickListener() {
