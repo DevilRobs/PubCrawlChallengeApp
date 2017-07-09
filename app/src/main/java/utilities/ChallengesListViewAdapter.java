@@ -11,6 +11,8 @@ import android.widget.TextView;
 
 import com.example.rober.pubcrawlchallengeapp.R;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -21,7 +23,7 @@ public class ChallengesListViewAdapter extends ArrayAdapter<Challenges> {
 
 
         private String TAG = "ChallengeAdapter";
-
+        private int layout = 1;
 
         public ChallengesListViewAdapter(Context context, int textViewResourceId) {
             super(context, textViewResourceId);
@@ -36,34 +38,71 @@ public class ChallengesListViewAdapter extends ArrayAdapter<Challenges> {
 
             View v = convertView;
 
-            if (v == null) {
-                LayoutInflater vi;
-                vi = LayoutInflater.from(getContext());
-                v = vi.inflate(R.layout.challenge_list_item, null);
-            }
+
 
             Challenges c = getItem(position);
 
             if (c != null) {
-                TextView tv_challengeName = (TextView) v.findViewById(R.id.tv_challengeName);
-                TextView tv_decription = (TextView) v.findViewById(R.id.tv_challengeDescription);
-                ImageView iv_challengeIcon = (ImageView) v.findViewById(R.id.iv_challengeIcon);
+                switch (layout) {
+                    case 1:
+                        if (v == null) {
+                            LayoutInflater vi;
+                            vi = LayoutInflater.from(getContext());
+                            v = vi.inflate(R.layout.challenge_list_item, null);
+                        }
 
-                if (tv_challengeName != null) {
-                    tv_challengeName.setText(c.getChallengeName());
-                }
+                    TextView tv_challengeName = (TextView) v.findViewById(R.id.tv_challengeName);
+                    TextView tv_decription = (TextView) v.findViewById(R.id.tv_challengeDescription);
+                    ImageView iv_challengeIcon = (ImageView) v.findViewById(R.id.iv_challengeIcon);
 
-                if (tv_decription != null) {
-                    tv_decription.setText(c.getChallengeDescription());
-                }
+                    if (tv_challengeName != null) {
+                        tv_challengeName.setText(c.getChallengeName());
+                    }
 
-                if (iv_challengeIcon != null) {
-                    Log.d(TAG, "challengeIcon reached");
-                    iv_challengeIcon.setImageResource(c.getIcon());
+                    if (tv_decription != null) {
+                        tv_decription.setText(c.getChallengeDescription());
+                    }
+
+                    if (iv_challengeIcon != null) {
+                        iv_challengeIcon.setImageResource(c.getIcon());
+                    }
+                    break;
+                    case 2:
+                        if (v == null) {
+                            LayoutInflater vi;
+                            vi = LayoutInflater.from(getContext());
+                            v = vi.inflate(R.layout.challenge_list_item_title_icon, null);
+                        }
+                        TextView tv_title = (TextView) v.findViewById(R.id.tv_listItemTitle);
+                        ImageView iv_Listicon = (ImageView) v.findViewById(R.id.iv_listItemIcon);
+                        if(iv_Listicon != null)
+                            iv_Listicon.setImageResource(c.getIcon());
+
+                        if(tv_title != null)
+                            tv_title.setText(c.getChallengeName());
+                        break;
+                    case 3:
+
+                        if (v == null) {
+                            LayoutInflater vi;
+                            vi = LayoutInflater.from(getContext());
+                            v = vi.inflate(R.layout.challenge_list_item_icon, null);
+                        }
+
+                        Log.d("justicon", c.getChallengeName() + " " + c.getChallengeDescription() + " " + c.getIcon());
+                        ImageView iv_icon = (ImageView) v.findViewById(R.id.iv_icon);
+                        if(iv_icon != null)
+                        iv_icon.setImageResource(c.getIcon());
+
+                    break;
                 }
             }
 
             return v;
+        }
+
+        public void setLayout(int layout){
+            this.layout = layout;
         }
 
     }
