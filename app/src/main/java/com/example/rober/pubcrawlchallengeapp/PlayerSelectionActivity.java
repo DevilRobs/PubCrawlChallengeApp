@@ -14,6 +14,18 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import utilities.Task;
+
 /**
  * Created by rober on 05.07.2017.
  */
@@ -23,6 +35,9 @@ public class PlayerSelectionActivity extends AppCompatActivity {
     private Activity activity = this;
     private String TAG = "PlayerSelection";
     private int playerCounter = 0;
+
+    private static List<Task> tasks;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,6 +55,8 @@ public class PlayerSelectionActivity extends AppCompatActivity {
             createPlayerElement();
         }
 
+        //Initialize task database
+        tasks = getTasks();
     }
 
     private View.OnClickListener addPlayer = new View.OnClickListener() {
@@ -47,6 +64,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         public void onClick(View view) {
             Log.i(TAG, "Add Player!");
             createPlayerElement();
+            getTasks();
         }
     };
 
@@ -107,5 +125,53 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         ll_player.addView(sw_playerGender);
         LinearLayout lv = (LinearLayout) findViewById(R.id.layout_player);
         lv.addView(ll_player);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                Object value = dataSnapshot.getValue(Object.class);
+                Log.i(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
     }
+
+    private List<Task> getTasks(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference();
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                Object value = dataSnapshot.getValue();
+                HashMap hs = (HashMap) value;
+                //HashMap hs2 = (HashMap) hs.get();
+
+
+                Log.i(TAG, "Value is: " + value);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+        return null;
+    }
+
+
+
 }

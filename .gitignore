@@ -10,3 +10,4 @@
 *.xml
 .idea/modules.xml
 .idea/modules.xml
+app/google-services.json
