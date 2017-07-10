@@ -26,10 +26,16 @@ public class MainActivity extends Activity {
 
     private String TAG = "MainActivity";
     private ListView challengesListView;
+    private ListView challengesListView_twoCol;
+
+    private List<Challenges> col1, col2;
+
     private Activity mainActivity = this;
     private ImageView iv_change_challenge_style;
     private int challengesLayout = 0;
     private ChallengesListViewAdapter challengesListAdapter;
+    private ChallengesListViewAdapter challengesListAdapterOne;
+    private ChallengesListViewAdapter challengesListAdapterTwo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +78,11 @@ public class MainActivity extends Activity {
         challengesList.add(new Challenges("Dritte Challenge",
                 "3", R.drawable.ic_thumb_up_black_24dp));
 
-        if(true){
-            // int numberOfItems = challengesList.size();
-            List<Challenges> col1 = new LinkedList<>(), col2 = new LinkedList<>();
+
+            challengesListView_twoCol = (ListView) findViewById(R.id.lv_challengesList_2col);
+
+            col1 = new LinkedList<>();
+            col2 = new LinkedList<>();
 
             int numberOfItems = challengesList.size()%2 == 0 ? challengesList.size()/2 : challengesList.size()/2+1;
 
@@ -97,15 +105,17 @@ public class MainActivity extends Activity {
 
 
 
-        }
 
 
-        // set the adapter of the listview with the custom layout + adapter
-        challengesListAdapter = new ChallengesListViewAdapter(this,
-                R.layout.challenge_list_item, challengesList);
+            // set the adapter of the listview with the custom layout + adapter
+            challengesListAdapter = new ChallengesListViewAdapter(this,
+                    R.layout.challenge_list_item, challengesList);
 
-        // set the adapter to show the content in the listview
-        challengesListView.setAdapter(challengesListAdapter);
+            // set the adapter to show the content in the listview
+            challengesListView.setAdapter(challengesListAdapter);
+            challengesListView.setVisibility(View.VISIBLE);
+
+
     }
 
     private void handleStyleChange() {
@@ -129,6 +139,9 @@ public class MainActivity extends Activity {
                 btn_full.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
+                        challengesListView_twoCol.setVisibility(View.GONE);
+
                         challengesLayout = 1;
                         challengesListAdapter.setLayout(1);
                         challengesListView.setAdapter(challengesListAdapter);
@@ -140,6 +153,7 @@ public class MainActivity extends Activity {
                 btn_slim.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+                        challengesListView_twoCol.setVisibility(View.GONE);
                         challengesLayout = 2;
                         challengesListAdapter.setLayout(2);
                         challengesListView.setAdapter(challengesListAdapter);
@@ -154,9 +168,20 @@ public class MainActivity extends Activity {
                     @Override
                     public void onClick(View v) {
                         challengesLayout = 3;
-                        challengesListAdapter.setLayout(3);
-                        challengesListView.setAdapter(challengesListAdapter);
-                        challengesListAdapter.notifyDataSetChanged();
+
+                        challengesListView_twoCol.setVisibility(View.VISIBLE);
+                        challengesListAdapterOne = new ChallengesListViewAdapter(mainActivity,
+                                R.layout.challenge_list_item_icon, col1);
+                        challengesListAdapterTwo = new ChallengesListViewAdapter(mainActivity,
+                                R.layout.challenge_list_item_icon, col2);
+
+                        challengesListAdapterOne.setLayout(3);
+                        challengesListAdapterTwo.setLayout(3);
+                        challengesListView.setAdapter(challengesListAdapterOne);
+                        challengesListView_twoCol.setAdapter(challengesListAdapterTwo);
+                        challengesListView.setVisibility(View.VISIBLE);
+                        challengesListAdapterOne.notifyDataSetChanged();
+                        challengesListAdapterTwo.notifyDataSetChanged();
                         selectStyleDialog.dismiss();
 
                     }

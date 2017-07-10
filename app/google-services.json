@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1046743482454-ncq5ev3jeri7nrm3vkcvsk6ummv2jgok.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.rober.pubcrawlchallengeapp",
+            "certificate_hash": "a91eb9d3179298c092a414f0af6f0ee0a5618891"
+          }
+        },
+        {
           "client_id": "1046743482454-0pqnmdlqssji8l6qmhj3caofumlnu0rp.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,8 +37,13 @@
           "status": 1
         },
         "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1046743482454-0pqnmdlqssji8l6qmhj3caofumlnu0rp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         },
         "ads_service": {
           "status": 2
