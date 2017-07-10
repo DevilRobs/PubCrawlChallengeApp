@@ -20,8 +20,6 @@ import android.widget.TextView;
 
 public class PlayerSelectionActivity extends AppCompatActivity {
 
-    DatabaseHelper myDB;
-
     private Activity activity = this;
     private String TAG = "PlayerSelection";
     private int playerCounter = 0;
@@ -42,9 +40,6 @@ public class PlayerSelectionActivity extends AppCompatActivity {
             createPlayerElement();
         }
 
-        //Initialize the database
-        myDB = new DatabaseHelper(this);
-
     }
 
     private View.OnClickListener addPlayer = new View.OnClickListener() {
@@ -60,18 +55,18 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         //Initalize Parameter for the layout
         LinearLayout.LayoutParams ll_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
+                LinearLayout.LayoutParams.WRAP_CONTENT, 10
         );
-        //Initialize Paramter for the edit text
+        //Initialize Parameter for the edit text
         LinearLayout.LayoutParams et_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT, 7
+                LinearLayout.LayoutParams.WRAP_CONTENT, 9
 
         );
-        //Initialize Paramter for the switch
+        //Initialize Parameter for the switch
         LinearLayout.LayoutParams sw_params = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT, 2
+                LinearLayout.LayoutParams.WRAP_CONTENT, 1
         );
 
         //create a new LinearLayout
@@ -89,10 +84,11 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         et_playerName.setHint("Player "+playerCounter);
 
 
+
         //create a new Switch
         final Switch sw_playerGender = new Switch(activity);
         sw_playerGender.setLayoutParams(sw_params);
-        sw_playerGender.setPadding(15,0,0,0);
+        sw_playerGender.setPadding(10,0,0,0);
         sw_playerGender.setText(R.string.sw_gender_male);
         sw_playerGender.setOnClickListener(new View.OnClickListener() {
             @Override
