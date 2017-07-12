@@ -37,6 +37,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
     private int playerCounter = 0;
 
     private static List<Task> tasks;
+    private DatabaseHelper dbh;
 
 
     @Override
@@ -56,7 +57,8 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         }
 
         //Initialize task database
-        tasks = getTasks();
+        dbh = new DatabaseHelper();
+        tasks = dbh.getTasks();
     }
 
     private View.OnClickListener addPlayer = new View.OnClickListener() {
@@ -64,7 +66,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         public void onClick(View view) {
             Log.i(TAG, "Add Player!");
             createPlayerElement();
-            getTasks();
+            tasks = dbh.getTasks();
         }
     };
 
@@ -119,7 +121,6 @@ public class PlayerSelectionActivity extends AppCompatActivity {
             }
         });
 
-
         //register elements
         ll_player.addView(et_playerName);
         ll_player.addView(sw_playerGender);
@@ -144,32 +145,6 @@ public class PlayerSelectionActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-    }
-
-    private List<Task> getTasks(){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Object value = dataSnapshot.getValue();
-                HashMap hs = (HashMap) value;
-                //HashMap hs2 = (HashMap) hs.get();
-
-
-                Log.i(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-        return null;
     }
 
 
