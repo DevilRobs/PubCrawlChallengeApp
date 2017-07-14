@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import utilities.Player;
 import utilities.Task;
 
 /**
@@ -38,6 +39,8 @@ public class PlayerSelectionActivity extends AppCompatActivity {
 
     private DatabaseHelper dbh;
 
+    private int selectedChallenge = 0;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -46,9 +49,11 @@ public class PlayerSelectionActivity extends AppCompatActivity {
 
         //Initialize Elements
         Button btn_addPlayer = (Button) findViewById(R.id.btn_addPlayer);
+        Button btn_startChallenge = (Button) findViewById(R.id.btn_startChallenge);
 
         //Register the Listener
         btn_addPlayer.setOnClickListener(addPlayer);
+        btn_startChallenge.setOnClickListener(startChallenge);
 
         //Initialize with 4 players
         for (int i = 0; i < 4; i++) {
@@ -65,6 +70,14 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         public void onClick(View view) {
             Log.i(TAG, "Add Player!");
             createPlayerElement();
+        }
+    };
+
+    private View.OnClickListener startChallenge = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            List players = getPlayers();
+            AlgorithmGenerator ag = new AlgorithmGenerator(dbh.getTasks(), selectedChallenge, players);
         }
     };
 
@@ -124,6 +137,25 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         LinearLayout lv = (LinearLayout) findViewById(R.id.layout_player);
         lv.addView(ll_player);
 
+    }
+
+    private List getPlayers(){
+
+        List<Player> l = new LinkedList();
+
+        LinearLayout lv = (LinearLayout) findViewById(R.id.layout_player);
+        final int childCount = lv.getChildCount();
+        for (int i = 0; i < childCount; i++) {
+            LinearLayout ll = (LinearLayout) lv.getChildAt(i);
+            EditText et = (EditText) ll.getChildAt(0);
+            String name = et.getText().toString();
+
+            Switch sw = (Switch) ll.getChildAt(1);
+            boolean gender = sw.getText().equals("Boy");
+
+            l.add(new Player(name, gender));
+        }
+        return l;
     }
 
 
