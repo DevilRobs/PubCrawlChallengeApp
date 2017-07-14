@@ -8,10 +8,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -25,9 +23,10 @@ public class DatabaseHelper {
 
     private static FirebaseDatabase database;
     private static List allTasks;
+    private static List allChallenges;
     private static HashMap data;
 
-    private List<Task> introTasks, extroTasks, sexualTasks, senselessTasks, menTasks, womenTasks;
+    private static List introTasks, extroTasks, sexualTasks, senselessTasks, menTasks, womenTasks, genderlessTasks;
 
     private String TAG = "DatabaseHelper";
 
@@ -40,11 +39,14 @@ public class DatabaseHelper {
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 data = (HashMap) dataSnapshot.getValue();
+                Log.i(TAG, "Database created");
 
                 //Get the list of tasks
-                allTasks = (ArrayList) data.get(0);
+                allTasks = (ArrayList) data.get("0");
+                allChallenges = (ArrayList) data.get("Challenges");
                 separateTasks();
 
+                boolean i = true;
                 //Get the list of something else
                 //...
             }
@@ -52,33 +54,90 @@ public class DatabaseHelper {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
+                Log.i(TAG, "Failed to read value.", error.toException());
             }
         });
+
+        introTasks = new ArrayList();
+        extroTasks = new ArrayList();
+        womenTasks = new ArrayList();
+        menTasks = new ArrayList();
+        senselessTasks = new ArrayList();
+        sexualTasks = new ArrayList();
+        genderlessTasks = new ArrayList();
+    }
+
+    public static List getIntroTasks() {
+        return introTasks;
+    }
+
+    public static List getExtroTasks() {
+        return extroTasks;
+    }
+
+    public static List getSexualTasks() {
+        return sexualTasks;
+    }
+
+    public static List getSenselessTasks() {
+        return senselessTasks;
+    }
+
+    public static List getMenTasks() {
+        return menTasks;
+    }
+
+    public static List getWomenTasks() {
+        return womenTasks;
+    }
+
+    public static List getGenderlessTasks() {
+        return genderlessTasks;
     }
 
 
     public List<Task> getTasks() {
-        Log.i(TAG, "Tasks returned, size");
-        separateTasks();
+        Log.i(TAG, "Tasks returned");
         return allTasks;
     }
 
-    public void separateTasks() {
+    private void separateTasks() {
 
-        if(allTasks != null){
-        for(Object obj : allTasks) {
+        if (allTasks != null) for (Object obj : allTasks) {
             Map hs = (HashMap) obj;
 
-            Iterator<Integer> keySetIterator = hs.keySet().iterator();
 
-            while (keySetIterator.hasNext()) {
-                Integer key = keySetIterator.next();
-                Log.i(TAG, "key: " + key + " value: " + hs.get(key));
+            //Iterator to go through all keys.
+            /*Iterator<Integer> keySetIterator = hs.keySet().iterator();
+
+                while (keySetIterator.hasNext()) {
+
+                    //As the keys are also String we need to take the value of the int
+                    String key = String.valueOf(keySetIterator.next());
+
+                    Log.i(TAG, "key: " + key + " value: " + hs.get(key));
+
+
+                }*/
+
+            //Assign all the tasks
+            if (hs.get("Women").equals("Y")) womenTasks.add(obj);
+            if (hs.get("Men").equals("Y")) menTasks.add(obj);
+            if (hs.get("Introvertiert").equals("Y")) introTasks.add(obj);
+            if (hs.get("Extrovertiert").equals("Y")) extroTasks.add(obj);
+            if (hs.get("Sexual").equals("Y")) sexualTasks.add(obj);
+            if (hs.get("Senseless").equals("Y")) senselessTasks.add(obj);
+
+            if (hs.get("Women").equals("Y") && hs.get("Men").equals("Y")) {
+                genderlessTasks.add(obj);
             }
-        }
+
+            Log.i(TAG, "Tasks seperated!");
         }
     }
+
+
+
 
 
 }

@@ -36,7 +36,6 @@ public class PlayerSelectionActivity extends AppCompatActivity {
     private String TAG = "PlayerSelection";
     private int playerCounter = 0;
 
-    private static List<Task> tasks;
     private DatabaseHelper dbh;
 
 
@@ -58,7 +57,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
 
         //Initialize task database
         dbh = new DatabaseHelper();
-        tasks = dbh.getTasks();
+
     }
 
     private View.OnClickListener addPlayer = new View.OnClickListener() {
@@ -66,7 +65,6 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         public void onClick(View view) {
             Log.i(TAG, "Add Player!");
             createPlayerElement();
-            tasks = dbh.getTasks();
         }
     };
 
@@ -125,10 +123,6 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         ll_player.addView(sw_playerGender);
         LinearLayout lv = (LinearLayout) findViewById(R.id.layout_player);
         lv.addView(ll_player);
-
-        if(dbh != null) {
-            dbh.separateTasks();
-        }
 
     }
 
