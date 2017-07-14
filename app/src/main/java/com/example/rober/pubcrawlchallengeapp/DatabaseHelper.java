@@ -11,6 +11,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -42,6 +43,7 @@ public class DatabaseHelper {
 
                 //Get the list of tasks
                 allTasks = (ArrayList) data.get(0);
+                separateTasks();
 
                 //Get the list of something else
                 //...
@@ -57,15 +59,25 @@ public class DatabaseHelper {
 
 
     public List<Task> getTasks() {
-        Log.i(TAG, "Tasks returned, size = " + allTasks.size());
-
+        Log.i(TAG, "Tasks returned, size");
+        separateTasks();
         return allTasks;
     }
 
-    private void separateTasks() {
-        //for(Map hs : allTasks){
+    public void separateTasks() {
 
-        //}
+        if(allTasks != null){
+        for(Object obj : allTasks) {
+            Map hs = (HashMap) obj;
+
+            Iterator<Integer> keySetIterator = hs.keySet().iterator();
+
+            while (keySetIterator.hasNext()) {
+                Integer key = keySetIterator.next();
+                Log.i(TAG, "key: " + key + " value: " + hs.get(key));
+            }
+        }
+        }
     }
 
 

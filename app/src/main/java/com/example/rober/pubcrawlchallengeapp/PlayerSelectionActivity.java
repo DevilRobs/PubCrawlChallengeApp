@@ -52,7 +52,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         btn_addPlayer.setOnClickListener(addPlayer);
 
         //Initialize with 4 players
-        for(int i = 0; i < 4; i++){
+        for (int i = 0; i < 4; i++) {
             createPlayerElement();
         }
 
@@ -93,7 +93,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         LinearLayout ll_player = new LinearLayout(activity);
         ll_player.setLayoutParams(ll_params);
         ll_player.setOrientation(LinearLayout.HORIZONTAL);
-        ll_player.setPadding(10,10,10,10);
+        ll_player.setPadding(10, 10, 10, 10);
         ll_player.setWeightSum(10);
 
 
@@ -101,21 +101,20 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         EditText et_playerName = new EditText(activity);
         et_playerName.setLayoutParams(et_params);
         playerCounter += 1;
-        et_playerName.setHint("Player "+playerCounter);
-
+        et_playerName.setHint("Player " + playerCounter);
 
 
         //create a new Switch
         final Switch sw_playerGender = new Switch(activity);
         sw_playerGender.setLayoutParams(sw_params);
-        sw_playerGender.setPadding(10,0,0,0);
+        sw_playerGender.setPadding(10, 0, 0, 0);
         sw_playerGender.setText(R.string.sw_gender_male);
         sw_playerGender.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(sw_playerGender.isChecked()){
+                if (sw_playerGender.isChecked()) {
                     sw_playerGender.setText(R.string.sw_gender_female);
-                }else{
+                } else {
                     sw_playerGender.setText(R.string.sw_gender_male);
                 }
             }
@@ -127,26 +126,11 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         LinearLayout lv = (LinearLayout) findViewById(R.id.layout_player);
         lv.addView(ll_player);
 
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference();
+        if(dbh != null) {
+            dbh.separateTasks();
+        }
 
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Object value = dataSnapshot.getValue(Object.class);
-                Log.i(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
     }
-
 
 
 }
