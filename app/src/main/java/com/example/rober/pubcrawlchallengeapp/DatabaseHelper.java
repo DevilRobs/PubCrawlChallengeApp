@@ -46,7 +46,6 @@ public class DatabaseHelper {
                 allChallenges = (ArrayList) data.get("Challenges");
                 separateTasks();
 
-                boolean i = true;
                 //Get the list of something else
                 //...
             }
@@ -95,6 +94,10 @@ public class DatabaseHelper {
         return genderlessTasks;
     }
 
+    public static List getAllChallenges(){
+        return allChallenges;
+    }
+
 
     public List<Task> getTasks() {
         Log.i(TAG, "Tasks returned");
@@ -135,9 +138,4 @@ public class DatabaseHelper {
             Log.i(TAG, "Tasks seperated!");
         }
     }
-
-
-
-
-
 }
