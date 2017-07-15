@@ -14,6 +14,7 @@ public class Player {
     public Player(String name, boolean gender) {
         this.name = name;
         this.gender = gender;
+        this.points = 0;
     }
 
     public String getName() {

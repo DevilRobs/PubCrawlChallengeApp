@@ -77,7 +77,8 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         @Override
         public void onClick(View view) {
             List players = getPlayers();
-            AlgorithmGenerator ag = new AlgorithmGenerator(dbh.getTasks(), selectedChallenge, players);
+            AlgorithmGenerator ag = new AlgorithmGenerator(dbh, selectedChallenge, players);
+            ag.generateChallenge();
         }
     };
 
