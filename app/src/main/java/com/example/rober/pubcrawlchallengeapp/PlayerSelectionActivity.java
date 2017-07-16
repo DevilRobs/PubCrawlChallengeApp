@@ -1,6 +1,7 @@
 package com.example.rober.pubcrawlchallengeapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -25,6 +26,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 import utilities.Player;
+import utilities.ProducedChallenge;
+import utilities.ReducedChallenge;
 import utilities.Task;
 
 /**
@@ -78,7 +81,14 @@ public class PlayerSelectionActivity extends AppCompatActivity {
         public void onClick(View view) {
             List players = getPlayers();
             AlgorithmGenerator ag = new AlgorithmGenerator(dbh, selectedChallenge, players);
-            ag.generateChallenge();
+            ProducedChallenge pc = ag.generateChallenge();
+
+            //Time to send the challenge
+            Intent intent = new Intent(activity, ChallengeActivity.class);
+            ReducedChallenge rc = new ReducedChallenge(pc.getTasks(), pc.getPlayers(), true);
+            intent.putStringArrayListExtra("Tasks", rc.getTasks());
+            intent.putStringArrayListExtra("Players", rc.getPlayers());
+            startActivity(intent);
         }
     };
 

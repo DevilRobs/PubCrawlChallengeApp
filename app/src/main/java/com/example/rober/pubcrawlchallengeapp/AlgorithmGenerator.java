@@ -1,11 +1,8 @@
 package com.example.rober.pubcrawlchallengeapp;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import utilities.ProducedChallenge;
@@ -31,6 +28,7 @@ public class AlgorithmGenerator {
     public ProducedChallenge generateChallenge() {
 
         ProducedChallenge pc = new ProducedChallenge();
+        pc.setPlayers(players);
 
 
         //0 = extrovertedChallenge
@@ -40,14 +38,26 @@ public class AlgorithmGenerator {
         switch (selectedChallenge) {
             case 0:
                 addTasksToChallenge(dbh.getExtroTasks(), pc);
+                break;
+            case 1:
+                addTasksToChallenge(dbh.getIntroTasks(), pc);
+                break;
+            case 2:
+                addTasksToChallenge(dbh.getSenselessTasks(), pc);
+                break;
+            case 3:
+                addTasksToChallenge(dbh.getSexualTasks(), pc);
+                break;
         }
 
-        return null;
+
+
+
+        return pc;
     }
 
 
-
-    private void addTasksToChallenge(List mainTasks, ProducedChallenge pc){
+    private void addTasksToChallenge(List mainTasks, ProducedChallenge pc) {
         List listOfTasks = new ArrayList();
 
         //Nr of taken main tasks
@@ -60,12 +70,12 @@ public class AlgorithmGenerator {
             int randomInt = r.nextInt(mainTasks.size());
 
             //If this tasks is already taken then choose another one
-            if(!usedInts.contains(randomInt)){
+            if (!usedInts.contains(randomInt)) {
                 listOfTasks.add(mainTasks.get(randomInt));
                 usedInts.add(randomInt);
-            }else{
+            } else {
                 i--;
-                if(usedInts.size() == mainTasks.size()) break;
+                if (usedInts.size() == mainTasks.size()) break;
             }
         }
 
@@ -80,7 +90,7 @@ public class AlgorithmGenerator {
 
     }
 
-    private List getRemainingTasks(int nrOfRemainingTasks, List mainTasks){
+    private List getRemainingTasks(int nrOfRemainingTasks, List mainTasks) {
         List listOfTasks = new ArrayList();
 
         List remainingTasks = dbh.getTasks();
@@ -93,12 +103,12 @@ public class AlgorithmGenerator {
             int randomInt = r.nextInt(remainingTasks.size());
 
             //If this tasks is already taken then choose another one
-            if(!usedInts.contains(randomInt)){
+            if (!usedInts.contains(randomInt)) {
                 listOfTasks.add(mainTasks.get(randomInt));
                 usedInts.add(randomInt);
-            }else{
+            } else {
                 i--;
-                if(usedInts.size() == mainTasks.size()) break;
+                if (usedInts.size() == mainTasks.size()) break;
             }
         }
         return listOfTasks;

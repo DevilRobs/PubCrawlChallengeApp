@@ -1,5 +1,7 @@
 package utilities;
 
+import java.io.Serializable;
+
 /**
  * Created by rober on 14.07.2017.
  */
@@ -8,6 +10,8 @@ public class Player {
 
     private String name;
     private boolean gender;
+    //male is true
+    //female is false
 
     private int points;
 

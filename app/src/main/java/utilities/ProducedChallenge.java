@@ -7,7 +7,7 @@ import java.util.List;
  * Created by rober on 15.07.2017.
  */
 
-public class ProducedChallenge implements Serializable {
+public class ProducedChallenge {
 
     private int id;
     private List tasks;
