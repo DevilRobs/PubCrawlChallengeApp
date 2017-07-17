@@ -35,7 +35,7 @@ public class ReducedChallenge {
 
         players = new ArrayList<>();
         for(Player p : fullPlayers){
-            players.add(p.getName() + " | " + p.isGender());
+            players.add(p.getName());
         }
 
         //players = (String[]) playerslist.toArray();

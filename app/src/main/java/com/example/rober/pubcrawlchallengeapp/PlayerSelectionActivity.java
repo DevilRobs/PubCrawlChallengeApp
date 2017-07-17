@@ -152,7 +152,7 @@ public class PlayerSelectionActivity extends AppCompatActivity {
 
     private List getPlayers(){
 
-        List<Player> l = new LinkedList();
+        List<Player> l = new LinkedList<>();
 
         LinearLayout lv = (LinearLayout) findViewById(R.id.layout_player);
         final int childCount = lv.getChildCount();

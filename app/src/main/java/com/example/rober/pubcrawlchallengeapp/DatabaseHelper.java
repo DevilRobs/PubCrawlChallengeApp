@@ -21,14 +21,14 @@ import utilities.Task;
 
 public class DatabaseHelper {
 
-    private static FirebaseDatabase database;
-    private static List allTasks;
-    private static List allChallenges;
-    private static HashMap data;
+    private  FirebaseDatabase database;
+    private  List allTasks;
+    private  List allChallenges;
+    private  HashMap data;
 
-    private static List introTasks, extroTasks, sexualTasks, senselessTasks, menTasks, womenTasks, genderlessTasks;
+    private  List introTasks, extroTasks, sexualTasks, senselessTasks, menTasks, womenTasks, genderlessTasks;
 
-    private String TAG = "DatabaseHelper";
+    private  String TAG = "DatabaseHelper";
 
     public DatabaseHelper() {
         database = FirebaseDatabase.getInstance();
@@ -66,40 +66,40 @@ public class DatabaseHelper {
         genderlessTasks = new ArrayList();
     }
 
-    public static List getIntroTasks() {
+    public  List getIntroTasks() {
         return introTasks;
     }
 
-    public static List getExtroTasks() {
+    public  List getExtroTasks() {
         return extroTasks;
     }
 
-    public static List getSexualTasks() {
+    public  List getSexualTasks() {
         return sexualTasks;
     }
 
-    public static List getSenselessTasks() {
+    public  List getSenselessTasks() {
         return senselessTasks;
     }
 
-    public static List getMenTasks() {
+    public  List getMenTasks() {
         return menTasks;
     }
 
-    public static List getWomenTasks() {
+    public  List getWomenTasks() {
         return womenTasks;
     }
 
-    public static List getGenderlessTasks() {
+    public  List getGenderlessTasks() {
         return genderlessTasks;
     }
 
-    public static List getAllChallenges(){
+    public  List getAllChallenges(){
         return allChallenges;
     }
 
 
-    public List<Task> getTasks() {
+    public  List<Task> getTasks() {
         Log.i(TAG, "Tasks returned");
         return allTasks;
     }
@@ -124,8 +124,8 @@ public class DatabaseHelper {
                 }*/
 
             //Assign all the tasks
-            if (hs.get("Women").equals("Y")) womenTasks.add(obj);
-            if (hs.get("Men").equals("Y")) menTasks.add(obj);
+            if (hs.get("Women").equals("Y") && hs.get("Men").equals("N")) womenTasks.add(obj);
+            if (hs.get("Men").equals("Y") && hs.get("Women").equals("N")) menTasks.add(obj);
             if (hs.get("Introvertiert").equals("Y")) introTasks.add(obj);
             if (hs.get("Extrovertiert").equals("Y")) extroTasks.add(obj);
             if (hs.get("Sexual").equals("Y")) sexualTasks.add(obj);

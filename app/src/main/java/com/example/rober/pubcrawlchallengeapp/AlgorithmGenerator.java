@@ -1,10 +1,13 @@
 package com.example.rober.pubcrawlchallengeapp;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import utilities.Player;
 import utilities.ProducedChallenge;
 
 /**
@@ -13,18 +16,47 @@ import utilities.ProducedChallenge;
 
 public class AlgorithmGenerator {
 
-    private DatabaseHelper dbh;
+    String TAG = "AlgorithmGenerator";
+
+    private List tasksToUse;
     private int selectedChallenge;
-    private List players;
+    private List<Player> players;
+    private DatabaseHelper dbh;
 
     final int NR_OF_TASKS = 3;
+
+    private int genderPercentage;
+
 
     public AlgorithmGenerator(DatabaseHelper dbh, int selectedChallenge, List players) {
         this.dbh = dbh;
         this.selectedChallenge = selectedChallenge;
         this.players = players;
+        this.genderPercentage = getGenderPercentage();
+
+        tasksToUse = this.dbh.getTasks();
+
+        if(genderPercentage == 100){
+            tasksToUse.removeAll(this.dbh.getWomenTasks());
+        }else if(genderPercentage == 0){
+            tasksToUse.removeAll(this.dbh.getMenTasks());
+        }else{
+            tasksToUse.removeAll(this.dbh.getMenTasks());
+            tasksToUse.removeAll(this.dbh.getWomenTasks());
+        }
     }
 
+    //Calculate the genderPercentage
+    private int getGenderPercentage(){
+        int nrOfMen = 0;
+        for(int i = 0; i < players.size(); i++){
+            Player p = players.get(i);
+            if(p.isGender()) nrOfMen++;
+        }
+        return(Math.round((nrOfMen*100)/players.size()));
+    }
+
+    //Generates the challenge
     public ProducedChallenge generateChallenge() {
 
         ProducedChallenge pc = new ProducedChallenge();
@@ -37,26 +69,28 @@ public class AlgorithmGenerator {
         //3 = sexual
         switch (selectedChallenge) {
             case 0:
-                addTasksToChallenge(dbh.getExtroTasks(), pc);
+                Log.i(TAG, ""+dbh.getTasks().size());
+                List l = dbh.getExtroTasks();
+                tasksToUse.retainAll(l);
+                Log.i(TAG, ""+ dbh.getTasks().size());
                 break;
             case 1:
-                addTasksToChallenge(dbh.getIntroTasks(), pc);
+                tasksToUse.retainAll(new ArrayList<>(dbh.getIntroTasks()));
                 break;
             case 2:
-                addTasksToChallenge(dbh.getSenselessTasks(), pc);
+                tasksToUse.retainAll(dbh.getSenselessTasks());
                 break;
             case 3:
-                addTasksToChallenge(dbh.getSexualTasks(), pc);
+                tasksToUse.retainAll(dbh.getSexualTasks());
                 break;
         }
 
-
-
+        addTasksToChallenge(tasksToUse, pc);
 
         return pc;
     }
 
-
+    //Adds the main tasks to the challenge
     private void addTasksToChallenge(List mainTasks, ProducedChallenge pc) {
         List listOfTasks = new ArrayList();
 
@@ -64,7 +98,7 @@ public class AlgorithmGenerator {
         int nrOfMainTasks = (int) Math.round(NR_OF_TASKS * 0.6);
 
         Random r = new Random();
-        List usedInts = new ArrayList();
+        List<Integer> usedInts = new ArrayList<>();
         for (int i = 0; i < nrOfMainTasks; i++) {
             //Generate a random Int to take a random tasks
             int randomInt = r.nextInt(mainTasks.size());
@@ -90,14 +124,15 @@ public class AlgorithmGenerator {
 
     }
 
+    //Adds the remaining tasks to the challenge
     private List getRemainingTasks(int nrOfRemainingTasks, List mainTasks) {
         List listOfTasks = new ArrayList();
 
-        List remainingTasks = dbh.getTasks();
+        List<utilities.Task> remainingTasks = dbh.getTasks();
         remainingTasks.removeAll(mainTasks);
 
         Random r = new Random();
-        List usedInts = new ArrayList();
+        List<Integer> usedInts = new ArrayList<>();
         for (int i = 0; i < nrOfRemainingTasks; i++) {
             //Generate a random Int to take a random tasks
             int randomInt = r.nextInt(remainingTasks.size());
