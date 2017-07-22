@@ -86,7 +86,10 @@ public class PlayerSelectionActivity extends AppCompatActivity {
             //Time to send the challenge
             Intent intent = new Intent(activity, ChallengeActivity.class);
             ReducedChallenge rc = new ReducedChallenge(pc.getTasks(), pc.getPlayers(), true);
-            intent.putStringArrayListExtra("Tasks", rc.getTasks());
+
+
+            intent.putStringArrayListExtra("Tasks" , rc.getTasks());
+            intent.putIntegerArrayListExtra("Points", rc.getTasksPoints());
             intent.putStringArrayListExtra("Players", rc.getPlayers());
             startActivity(intent);
         }

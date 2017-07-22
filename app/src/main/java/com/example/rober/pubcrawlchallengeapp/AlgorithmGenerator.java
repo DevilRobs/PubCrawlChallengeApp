@@ -9,6 +9,7 @@ import java.util.Random;
 
 import utilities.Player;
 import utilities.ProducedChallenge;
+import utilities.Task;
 
 /**
  * Created by rober on 14.07.2017.
@@ -34,7 +35,7 @@ public class AlgorithmGenerator {
         this.players = players;
         this.genderPercentage = getGenderPercentage();
 
-        tasksToUse = this.dbh.getTasks();
+        tasksToUse = new ArrayList(this.dbh.getTasks());
 
         if(genderPercentage == 100){
             tasksToUse.removeAll(this.dbh.getWomenTasks());
@@ -69,13 +70,10 @@ public class AlgorithmGenerator {
         //3 = sexual
         switch (selectedChallenge) {
             case 0:
-                Log.i(TAG, ""+dbh.getTasks().size());
-                List l = dbh.getExtroTasks();
-                tasksToUse.retainAll(l);
-                Log.i(TAG, ""+ dbh.getTasks().size());
+                tasksToUse.retainAll(dbh.getExtroTasks());
                 break;
             case 1:
-                tasksToUse.retainAll(new ArrayList<>(dbh.getIntroTasks()));
+                tasksToUse.retainAll(dbh.getIntroTasks());
                 break;
             case 2:
                 tasksToUse.retainAll(dbh.getSenselessTasks());

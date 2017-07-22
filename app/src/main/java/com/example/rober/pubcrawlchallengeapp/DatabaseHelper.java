@@ -42,7 +42,7 @@ public class DatabaseHelper {
                 Log.i(TAG, "Database created");
 
                 //Get the list of tasks
-                allTasks = (ArrayList) data.get("0");
+                allTasks = (ArrayList) data.get("Tasks");
                 allChallenges = (ArrayList) data.get("Challenges");
                 separateTasks();
 
@@ -138,4 +138,9 @@ public class DatabaseHelper {
             Log.i(TAG, "Tasks seperated!");
         }
     }
+
+    public Task getTasksWithId(int id){
+        return (Task)allTasks.get(id);
+    }
+
 }

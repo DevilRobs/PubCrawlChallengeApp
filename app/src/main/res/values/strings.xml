@@ -2,4 +2,21 @@
     <string name="app_name">PubCrawlChallengeApp</string>
     <string name="sw_gender_male">Boy</string>
     <string name="sw_gender_female">Girl</string>
+
+
+
+
+
+
+
+
+
+
+
+    <string name="btn_done_ger">Geschafft!</string>
+    <string name="btn_done_eng">Done!</string>
+    <string name="btn_failed_ger">Ablehnen..</string>
+    <string name="btn_failed_eng">Refuse..</string>
+    <string name="Reward_eng">Reward </string>
+    <string name="Reward_ger">Belohnung </string>
 </resources>

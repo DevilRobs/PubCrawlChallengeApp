@@ -15,12 +15,14 @@ import utilities.Task;
 public class ReducedChallenge {
 
     private ArrayList<String> listtasks;
+    private ArrayList<Integer> listtaskpoints;
     private ArrayList<String> players;
 
 
 
     public ReducedChallenge(List<Task> fullTasks, List<Player> fullPlayers, boolean ger){
         listtasks = new ArrayList<>();
+        listtaskpoints = new ArrayList<>();
 
         for(Object t : fullTasks){
             HashMap hs = (HashMap) t;
@@ -30,6 +32,7 @@ public class ReducedChallenge {
             else if(!ger){
                 listtasks.add((String) hs.get("Task"));
             }
+            listtaskpoints.add((int)(long) hs.get("Points"));
         }
         //tasks = (String[])listtasks.toArray();
 
@@ -45,6 +48,10 @@ public class ReducedChallenge {
 
     public ArrayList getTasks() {
         return listtasks;
+    }
+
+    public ArrayList getTasksPoints() {
+        return listtaskpoints;
     }
 
     public ArrayList getPlayers() {
